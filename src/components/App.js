@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Components
 import { Nav } from './Nav';
@@ -49,11 +49,23 @@ export class App extends React.Component {
         return allTrips.filter(trip => filter ? trip.type === filter : trip).length;
     }
 
+    componentDidMount() {
+        if (localStorage['data'] === undefined){
+            localStorage['data'] = JSON.stringify(this.state.allTrips);
+        } else {
+            this.setState({ allTrips: JSON.parse(localStorage['data']) });
+        }
+    }
+
+    componentDidUpdate(_) {
+        localStorage['data'] = JSON.stringify(this.state.allTrips);
+    }
+
     // Switch goes to first matching route
     render () {
         return (
             <div className="app">                
-                <Router basename={"/tripstracker/"}>
+                <Router basename="/tripstracker/">
                     <div className="route-container">
                         <Nav />
                         <Switch>

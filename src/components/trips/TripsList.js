@@ -8,7 +8,7 @@ export const TripsList = ({match, days}) => {
     return (
         <div className="trips-list">
             <h3>{filter ? filter : 'All'} Trips</h3>            
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Date</th>
